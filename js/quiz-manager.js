@@ -5,43 +5,40 @@
 class QuizManager {
     constructor() {
         // Initialisation des propriétés de base
-        this.currentModule = null;
-        this.questions = [];
-        this.currentQuestionIndex = 0;
-        this.score = 0;
+        this.currentModule = null;     // Module actuellement sélectionné
+        this.questions = [];           // Liste des questions chargées
+        this.currentQuestionIndex = 0; // Index de la question actuelle
+        this.score = 0;               // Score du quiz en cours
 
-        // Attendre que le document soit chargé avant d'initialiser
+        // S'assurer que le DOM est chargé avant d'initialiser
         document.addEventListener('DOMContentLoaded', () => {
             this.initialize();
+            console.log('QuizManager initialisé');
         });
-
-        console.log('QuizManager créé');
     }
 
     /**
-     * Initialise les écouteurs d'événements et prépare l'interface
+     * Initialise les écouteurs d'événements pour les boutons de module
      */
     initialize() {
-        // Ajoute les écouteurs pour les boutons de module
         const moduleButtons = document.querySelectorAll('[data-module]');
         moduleButtons.forEach(button => {
             button.addEventListener('click', (e) => {
                 const moduleId = e.target.dataset.module;
-                console.log(`Module ${moduleId} sélectionné`);
+                console.log('Module sélectionné:', moduleId);
                 this.loadModule(moduleId);
             });
         });
-
-        console.log('QuizManager initialisé');
     }
 
     /**
-     * Charge les questions pour un module spécifique
+     * Charge les questions du module sélectionné
      */
     async loadModule(moduleNumber) {
-        console.log(`Chargement du module ${moduleNumber}`);
+        console.log('Chargement du module:', moduleNumber);
         try {
-            const response = await fetch(`data/module3/${moduleNumber}_1.json`);
+            // Charger le fichier JSON du module
+            const response = await fetch(`data/module3/3_1.json`);
             if (!response.ok) {
                 throw new Error(`Erreur HTTP! statut: ${response.status}`);
             }
@@ -49,23 +46,25 @@ class QuizManager {
             const data = await response.json();
             console.log('Questions chargées:', data);
             
+            // Initialiser le quiz avec les questions chargées
             this.questions = data.questions;
             this.currentModule = moduleNumber;
             this.currentQuestionIndex = 0;
             this.score = 0;
             
+            // Afficher la première question
             this.displayQuestion();
         } catch (error) {
-            console.error('Erreur de chargement:', error);
+            console.error('Erreur lors du chargement:', error);
             this.handleError(error);
         }
     }
 
     /**
-     * Affiche la question actuelle
+     * Affiche la question actuelle et configure les écouteurs d'événements
      */
     displayQuestion() {
-        console.log(`Affichage de la question ${this.currentQuestionIndex + 1}`);
+        console.log('Affichage question:', this.currentQuestionIndex + 1);
         
         const quizContainer = document.getElementById('quiz-container');
         if (!this.questions.length) {
@@ -76,7 +75,7 @@ class QuizManager {
         const question = this.questions[this.currentQuestionIndex];
         const progress = ((this.currentQuestionIndex + 1) / this.questions.length) * 100;
 
-        // Construit l'HTML de la question
+        // Construction du HTML de la question
         quizContainer.innerHTML = `
             <div class="quiz-question">
                 <div class="progress-bar">
@@ -87,9 +86,8 @@ class QuizManager {
                 <div class="options">
                     ${question.options.map((option, index) => `
                         <button 
-                            id="option-${index}"
-                            class="option"
-                            onclick="quizManager.checkAnswer(${index})"
+                            class="option" 
+                            data-index="${index}"
                         >
                             ${option}
                         </button>
@@ -97,44 +95,62 @@ class QuizManager {
                 </div>
             </div>
         `;
+
+        // Ajout des écouteurs d'événements sur les options APRÈS leur création
+        const optionButtons = quizContainer.querySelectorAll('.option');
+        optionButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const selectedIndex = parseInt(e.target.dataset.index);
+                console.log('Option sélectionnée:', selectedIndex);
+                this.checkAnswer(selectedIndex);
+            });
+        });
     }
 
     /**
-     * Vérifie la réponse sélectionnée
+     * Vérifie la réponse sélectionnée et affiche le feedback
      */
     checkAnswer(selectedIndex) {
-        console.log(`Vérification de la réponse: ${selectedIndex}`);
+        console.log('Vérification réponse:', selectedIndex);
         
         const question = this.questions[this.currentQuestionIndex];
         const isCorrect = selectedIndex === question.correctAnswer;
         
+        // Mise à jour du score
         if (isCorrect) {
             this.score++;
         }
 
-        // Désactive tous les boutons après la réponse
-        const buttons = document.querySelectorAll('.option');
-        buttons.forEach(button => {
+        // Désactiver les options et montrer la bonne réponse
+        const optionButtons = document.querySelectorAll('.option');
+        optionButtons.forEach(button => {
             button.disabled = true;
-            if (parseInt(button.id.split('-')[1]) === question.correctAnswer) {
-                button.style.backgroundColor = '#e8f6e8';
-            } else if (parseInt(button.id.split('-')[1]) === selectedIndex && !isCorrect) {
-                button.style.backgroundColor = '#fde8e8';
+            const index = parseInt(button.dataset.index);
+            if (index === question.correctAnswer) {
+                button.classList.add('correct');
+            } else if (index === selectedIndex && !isCorrect) {
+                button.classList.add('incorrect');
             }
         });
 
-        // Ajoute l'explication
+        // Créer la zone d'explication
         const explanationDiv = document.createElement('div');
         explanationDiv.className = `explanation ${isCorrect ? 'correct' : 'incorrect'}`;
         explanationDiv.innerHTML = `
             <h4>${isCorrect ? '✓ Correct!' : '✗ Incorrect'}</h4>
             <p>${question.explanation}</p>
-            <button onclick="quizManager.nextQuestion()">
+            <button class="next-button">
                 ${this.currentQuestionIndex + 1 < this.questions.length ? 'Question suivante' : 'Voir les résultats'}
             </button>
         `;
 
-        document.querySelector('.quiz-question').appendChild(explanationDiv);
+        // Ajouter l'explication et configurer le bouton suivant
+        const quizQuestion = document.querySelector('.quiz-question');
+        quizQuestion.appendChild(explanationDiv);
+
+        // Configurer le bouton suivant
+        const nextButton = explanationDiv.querySelector('.next-button');
+        nextButton.addEventListener('click', () => this.nextQuestion());
     }
 
     /**
@@ -163,12 +179,14 @@ class QuizManager {
                     <p>Votre score: ${this.score}/${this.questions.length}</p>
                     <p>Pourcentage: ${percentage.toFixed(1)}%</p>
                 </div>
-                <button onclick="quizManager.loadModule('${this.currentModule}')">
-                    Recommencer le quiz
-                </button>
-                <button onclick="location.reload()">
-                    Retour à la sélection des modules
-                </button>
+                <div class="action-buttons">
+                    <button onclick="quizManager.loadModule('${this.currentModule}')">
+                        Recommencer le quiz
+                    </button>
+                    <button onclick="location.reload()">
+                        Retour au menu principal
+                    </button>
+                </div>
             </div>
         `;
     }
@@ -177,6 +195,7 @@ class QuizManager {
      * Gère les erreurs qui peuvent survenir
      */
     handleError(error) {
+        console.error('Erreur:', error);
         const quizContainer = document.getElementById('quiz-container');
         quizContainer.innerHTML = `
             <div class="error-message">
@@ -190,3 +209,4 @@ class QuizManager {
 
 // Création de l'instance globale du Quiz Manager
 window.quizManager = new QuizManager();
+console.log('QuizManager créé et attaché à window');
