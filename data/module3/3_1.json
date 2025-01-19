@@ -1,0 +1,37 @@
+{
+  "moduleInfo": {
+    "moduleId": "3.1",
+    "title": "Théorie des électrons",
+    "level": 1,
+    "questionCount": 2,
+    "description": "Structure et répartition des charges électriques dans les atomes, les molécules, les ions et les composés"
+  },
+  "questions": [
+    {
+      "id": "3.1.A",
+      "question": "Un électron possède une charge électrique :",
+      "options": [
+        "Positive",
+        "Négative",
+        "Neutre",
+        "Variable selon sa vitesse"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Un électron possède toujours une charge électrique négative. C'est une propriété fondamentale de cette particule subatomique. La valeur de cette charge est -1.602 × 10^-19 coulombs.",
+      "syllabus": "Théorie des électrons - charges électriques fondamentales"
+    },
+    {
+      "id": "3.1.B",
+      "question": "Dans un atome neutre, le nombre d'électrons est :",
+      "options": [
+        "Toujours supérieur au nombre de protons",
+        "Toujours inférieur au nombre de protons",
+        "Égal au nombre de protons",
+        "Indépendant du nombre de protons"
+      ],
+      "correctAnswer": 2,
+      "explanation": "Dans un atome neutre, le nombre d'électrons est toujours égal au nombre de protons. C'est cette égalité qui confère à l'atome sa neutralité électrique, car les charges positives des protons sont exactement compensées par les charges négatives des électrons.",
+      "syllabus": "Théorie des électrons - structure atomique"
+    }
+  ]
+}
