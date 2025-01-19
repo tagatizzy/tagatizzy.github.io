@@ -3,7 +3,7 @@
     "moduleId": "3.1",
     "title": "Théorie des électrons",
     "level": 1,
-    "questionCount": 2,
+    "requiredQuestions": 2,
     "description": "Structure et répartition des charges électriques dans les atomes, les molécules, les ions et les composés"
   },
   "questions": [
@@ -17,8 +17,8 @@
         "Variable selon sa vitesse"
       ],
       "correctAnswer": 1,
-      "explanation": "Un électron possède toujours une charge électrique négative. C'est une propriété fondamentale de cette particule subatomique. La valeur de cette charge est -1.602 × 10^-19 coulombs.",
-      "syllabus": "Théorie des électrons - charges électriques fondamentales"
+      "explanation": "Un électron possède toujours une charge électrique négative. C'est une propriété fondamentale de cette particule subatomique.",
+      "difficulty": "facile"
     },
     {
       "id": "3.1.B",
@@ -30,8 +30,47 @@
         "Indépendant du nombre de protons"
       ],
       "correctAnswer": 2,
-      "explanation": "Dans un atome neutre, le nombre d'électrons est toujours égal au nombre de protons. C'est cette égalité qui confère à l'atome sa neutralité électrique, car les charges positives des protons sont exactement compensées par les charges négatives des électrons.",
-      "syllabus": "Théorie des électrons - structure atomique"
+      "explanation": "Dans un atome neutre, le nombre d'électrons est égal au nombre de protons, assurant la neutralité électrique.",
+      "difficulty": "facile"
+    },
+    {
+      "id": "3.1.C",
+      "question": "La charge électrique d'un proton est :",
+      "options": [
+        "Égale en valeur mais opposée à celle d'un électron",
+        "Deux fois plus grande que celle d'un électron",
+        "La moitié de celle d'un électron",
+        "Variable selon la température"
+      ],
+      "correctAnswer": 0,
+      "explanation": "La charge d'un proton est égale en valeur absolue mais opposée à celle d'un électron (+1.602 × 10^-19 coulombs).",
+      "difficulty": "moyen"
+    },
+    {
+      "id": "3.1.D",
+      "question": "Les ions positifs sont formés quand un atome :",
+      "options": [
+        "Gagne des électrons",
+        "Perd des électrons",
+        "Gagne des protons",
+        "Perd des protons"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Un ion positif se forme quand un atome perd des électrons, créant ainsi un excès de charges positives.",
+      "difficulty": "moyen"
+    },
+    {
+      "id": "3.1.E",
+      "question": "Le noyau d'un atome contient :",
+      "options": [
+        "Uniquement des protons",
+        "Uniquement des neutrons",
+        "Des protons et des électrons",
+        "Des protons et des neutrons"
+      ],
+      "correctAnswer": 3,
+      "explanation": "Le noyau atomique contient des protons (chargés positivement) et des neutrons (électriquement neutres).",
+      "difficulty": "facile"
     }
   ]
 }
