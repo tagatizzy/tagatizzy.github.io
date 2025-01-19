@@ -10,33 +10,24 @@
     <div class="container">
         <h1>Quiz EASA B1.1</h1>
         
+        <!-- Section de sélection des modules -->
         <div id="module-selection">
             <h2>Sélectionnez un module :</h2>
             <div class="module-section">
-                <!-- Remarquez que nous n'utilisons plus onclick directement -->
-                <button id="module3Button">
+                <button data-module="3">
                     Module 3 : Principes essentiels d'électricité
                 </button>
+                <!-- D'autres modules peuvent être ajoutés ici -->
             </div>
         </div>
 
+        <!-- Conteneur pour le quiz -->
         <div id="quiz-container">
-            <!-- Les questions seront insérées ici -->
+            <!-- Le contenu du quiz sera injecté ici -->
         </div>
     </div>
 
+    <!-- Chargement du Quiz Manager -->
     <script src="js/quiz-manager.js"></script>
-    <script>
-        // Ce code s'exécute une fois que tout est chargé
-        document.addEventListener('DOMContentLoaded', function() {
-            // Initialisation du gestionnaire de quiz
-            const quizManager = new QuizManager();
-            
-            // Ajout des écouteurs d'événements
-            document.getElementById('module3Button').addEventListener('click', function() {
-                quizManager.loadModule('3');
-            });
-        });
-    </script>
 </body>
 </html>
