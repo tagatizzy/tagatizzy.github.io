@@ -10,19 +10,20 @@
     <div class="container">
         <h1>Quiz EASA B1.1</h1>
         
+        <!-- Section de sélection des modules -->
         <div id="module-selection">
             <h2>Sélectionnez un module :</h2>
             <div class="module-section">
-                <button onclick="selectModule('3')">Module 3 : Principes essentiels d'électricité</button>
-                <!-- D'autres modules seront ajoutés ici -->
+                <button onclick="quizManager.loadModule('3')">Module 3 : Principes essentiels d'électricité</button>
             </div>
         </div>
 
+        <!-- Conteneur pour le quiz -->
         <div id="quiz-container">
-            <!-- Le quiz sera injecté ici par JavaScript -->
+            <!-- Les questions seront insérées ici -->
         </div>
     </div>
 
-    <script src="js/main.js"></script>
+    <script src="js/quiz-manager.js"></script>
 </body>
 </html>
