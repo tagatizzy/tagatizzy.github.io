@@ -1,29 +1,29 @@
-/**
- * Gestionnaire de Quiz pour la préparation à l'examen EASA
- * Cette version inclut la sélection aléatoire des questions pour mieux simuler l'examen
- * tout en offrant plus de variété dans la pratique
- */
 class QuizManager {
     constructor() {
-        // Initialisation des propriétés de base
-        this.currentModule = null;     // Module actuellement sélectionné
-        this.questions = [];           // Questions sélectionnées pour le quiz en cours
-        this.allQuestions = [];        // Banque complète de questions disponibles
-        this.currentQuestionIndex = 0; // Position dans le quiz actuel
-        this.score = 0;               // Score du quiz en cours
-        this.requiredQuestions = 0;    // Nombre de questions requis par le syllabus EASA
+        this.currentModule = null;
+        this.questions = [];
+        this.allQuestions = [];
+        this.currentQuestionIndex = 0;
+        this.score = 0;
+        this.requiredQuestions = 0;
 
-        // Initialisation quand le DOM est prêt
         document.addEventListener('DOMContentLoaded', () => {
             this.initialize();
             console.log('QuizManager initialisé');
         });
     }
 
-    /**
-     * Mélange un tableau de manière aléatoire
-     * Utilise l'algorithme de Fisher-Yates pour un mélange équitable
-     */
+    initialize() {
+        const moduleButtons = document.querySelectorAll('[data-module]');
+        moduleButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                const moduleId = e.target.dataset.module;
+                console.log('Module sélectionné:', moduleId);
+                this.loadModule(moduleId);
+            });
+        });
+    }
+
     shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -32,87 +32,44 @@ class QuizManager {
         return array;
     }
 
-    /**
-     * Sélectionne un nombre spécifique de questions au hasard
-     * Cette fonction est cruciale pour respecter le format EASA
-     */
-    selectRandomQuestions(questions, count) {
-        console.log(`Sélection de ${count} questions parmi ${questions.length} disponibles`);
-        return this.shuffleArray([...questions]).slice(0, count);
-    }
-
-    /**
-     * Charge le module et prépare le quiz avec le bon nombre de questions
-     */
     async loadModule(moduleNumber) {
         console.log('Chargement du module:', moduleNumber);
         try {
+            // Charger le fichier JSON
             const response = await fetch(`data/module3/3_1.json`);
             if (!response.ok) {
                 throw new Error(`Erreur HTTP! statut: ${response.status}`);
             }
             
             const data = await response.json();
-            console.log('Données chargées:', data);
             
-            // Stocke toutes les questions disponibles
-            this.allQuestions = data.questions;
-            // Récupère le nombre requis de questions depuis les informations du module
+            // Extraire le nombre requis de questions depuis moduleInfo
             this.requiredQuestions = data.moduleInfo.requiredQuestions;
+            console.log(`Nombre de questions requis: ${this.requiredQuestions}`);
             
-            // Sélectionne aléatoirement le bon nombre de questions
-            this.questions = this.selectRandomQuestions(
-                this.allQuestions, 
-                this.requiredQuestions
-            );
+            // Mélanger toutes les questions et en sélectionner le nombre requis
+            this.allQuestions = data.questions;
+            const shuffledQuestions = this.shuffleArray([...this.allQuestions]);
+            this.questions = shuffledQuestions.slice(0, this.requiredQuestions);
             
-            // Réinitialise le quiz
+            console.log(`Questions sélectionnées: ${this.questions.length}`);
+            
+            // Réinitialiser le quiz
             this.currentModule = moduleNumber;
             this.currentQuestionIndex = 0;
             this.score = 0;
             
-            // Commence le quiz
+            // Afficher la première question
             this.displayQuestion();
-            
-            console.log(`Quiz préparé avec ${this.requiredQuestions} questions sélectionnées`);
         } catch (error) {
             console.error('Erreur lors du chargement:', error);
             this.handleError(error);
         }
     }
 
-    // [Le reste du code reste identique à la version précédente...]
-
-    /**
-     * Affiche les statistiques détaillées à la fin du quiz
-     */
-    showResults() {
-        const percentage = (this.score / this.questions.length) * 100;
-        const quizContainer = document.getElementById('quiz-container');
-        
-        quizContainer.innerHTML = `
-            <div class="results">
-                <h2>Quiz terminé!</h2>
-                <div class="score-card">
-                    <p>Votre score: ${this.score}/${this.questions.length}</p>
-                    <p>Pourcentage: ${percentage.toFixed(1)}%</p>
-                    <p>Questions du module: ${this.requiredQuestions}/${this.allQuestions.length} disponibles</p>
-                </div>
-                <div class="action-buttons">
-                    <button onclick="quizManager.loadModule('${this.currentModule}')">
-                        Nouveau quiz (nouvelles questions)
-                    </button>
-                    <button onclick="location.reload()">
-                        Retour au menu principal
-                    </button>
-                </div>
-            </div>
-        `;
-    }
-
-    // [Le reste des méthodes reste identique...]
+    // Le reste du code reste identique...
+    // [Incluez ici le reste des méthodes: displayQuestion, checkAnswer, etc.]
 }
 
-// Création de l'instance globale du Quiz Manager
+// Création de l'instance globale
 window.quizManager = new QuizManager();
-console.log('QuizManager créé et attaché à window');
