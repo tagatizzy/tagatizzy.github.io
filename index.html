@@ -9,11 +9,20 @@
 <body>
     <div class="container">
         <h1>Quiz EASA B1.1</h1>
+        
         <div id="module-selection">
             <h2>Sélectionnez un module :</h2>
-            <button onclick="selectModule('3')">Module 3 : Principes essentiels d'électricité</button>
+            <div class="module-section">
+                <button onclick="selectModule('3')">Module 3 : Principes essentiels d'électricité</button>
+                <!-- D'autres modules seront ajoutés ici -->
+            </div>
+        </div>
+
+        <div id="quiz-container">
+            <!-- Le quiz sera injecté ici par JavaScript -->
         </div>
     </div>
+
     <script src="js/main.js"></script>
 </body>
 </html>
