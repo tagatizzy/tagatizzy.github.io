@@ -13,8 +13,8 @@
         <div id="module-selection">
             <h2>Sélectionnez un module :</h2>
             <div class="module-section">
-                <!-- Notez le changement ici : utilisation de window.quizManager -->
-                <button onclick="window.quizManager.loadModule('3')">
+                <!-- Remarquez que nous n'utilisons plus onclick directement -->
+                <button id="module3Button">
                     Module 3 : Principes essentiels d'électricité
                 </button>
             </div>
@@ -25,7 +25,18 @@
         </div>
     </div>
 
-    <!-- Important : le script doit être à la fin du body -->
     <script src="js/quiz-manager.js"></script>
+    <script>
+        // Ce code s'exécute une fois que tout est chargé
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialisation du gestionnaire de quiz
+            const quizManager = new QuizManager();
+            
+            // Ajout des écouteurs d'événements
+            document.getElementById('module3Button').addEventListener('click', function() {
+                quizManager.loadModule('3');
+            });
+        });
+    </script>
 </body>
 </html>
