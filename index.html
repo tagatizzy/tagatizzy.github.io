@@ -10,24 +10,32 @@
     <div class="container">
         <h1>Quiz EASA B1.1</h1>
         
-        <!-- Section de sélection des modules -->
+        <!-- La section de sélection des modules reste toujours visible au début -->
         <div id="module-selection">
             <h2>Sélectionnez un module :</h2>
             <div class="module-section">
+                <!-- Notez l'attribut data-module qui aide à identifier le module -->
                 <button data-module="3">
                     Module 3 : Principes essentiels d'électricité
                 </button>
-                <!-- D'autres modules peuvent être ajoutés ici -->
             </div>
         </div>
 
-        <!-- Conteneur pour le quiz -->
+        <!-- Le conteneur où le quiz sera affiché -->
         <div id="quiz-container">
-            <!-- Le contenu du quiz sera injecté ici -->
+            <!-- Le contenu sera injecté dynamiquement par JavaScript -->
         </div>
     </div>
 
-    <!-- Chargement du Quiz Manager -->
+    <!-- Debug logger pour nous aider à voir ce qui se passe -->
+    <div id="debug-log" style="display: none;"></div>
+
+    <!-- Chargement de notre gestionnaire de quiz -->
     <script src="js/quiz-manager.js"></script>
+    
+    <!-- Script d'initialisation -->
+    <script>
+        console.log('Page chargée, initialisation du quiz...');
+    </script>
 </body>
 </html>
