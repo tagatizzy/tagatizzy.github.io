@@ -1,0 +1,101 @@
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+/* Style du titre principal pour mettre en évidence la section active */
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+}
+
+/* Style pour les sections de modules, avec une mise en forme claire */
+.module-section {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Style pour les boutons, avec un design professionnel */
+button {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+/* Style pour les questions du quiz */
+.quiz-question {
+    background-color: white;
+    border-left: 4px solid #3498db;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+/* Style pour les options de réponse */
+.option {
+    display: block;
+    padding: 10px;
+    margin: 5px 0;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.option:hover {
+    background-color: #e9ecef;
+}
+
+/* Style pour les feedback de réponse */
+.correct {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+.incorrect {
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+/* Style pour l'explication après la réponse */
+.explanation {
+    padding: 15px;
+    margin-top: 10px;
+    background-color: #e8f4f8;
+    border-radius: 4px;
+    display: none; /* Caché par défaut */
+}
+
+/* Barre de progression */
+.progress-bar {
+    width: 100%;
+    height: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+.progress {
+    width: 0%;
+    height: 100%;
+    background-color: #3498db;
+    transition: width 0.3s ease;
+}
