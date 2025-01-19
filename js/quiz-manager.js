@@ -108,3 +108,6 @@ class QuizManager {
 
 // Créer une instance du gestionnaire de quiz
 const quizManager = new QuizManager();
+// À la fin du fichier quiz-manager.js
+// Rendre quizManager accessible globalement
+window.quizManager = new QuizManager();
