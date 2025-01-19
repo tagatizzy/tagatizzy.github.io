@@ -17,8 +17,7 @@
         "Variable selon sa vitesse"
       ],
       "correctAnswer": 1,
-      "explanation": "Un électron possède toujours une charge électrique négative. C'est une propriété fondamentale de cette particule subatomique.",
-      "difficulty": "facile"
+      "explanation": "Un électron possède toujours une charge électrique négative. C'est une propriété fondamentale de cette particule subatomique."
     },
     {
       "id": "3.1.B",
@@ -30,8 +29,7 @@
         "Indépendant du nombre de protons"
       ],
       "correctAnswer": 2,
-      "explanation": "Dans un atome neutre, le nombre d'électrons est égal au nombre de protons, assurant la neutralité électrique.",
-      "difficulty": "facile"
+      "explanation": "Dans un atome neutre, le nombre d'électrons est égal au nombre de protons."
     },
     {
       "id": "3.1.C",
@@ -43,8 +41,7 @@
         "Variable selon la température"
       ],
       "correctAnswer": 0,
-      "explanation": "La charge d'un proton est égale en valeur absolue mais opposée à celle d'un électron (+1.602 × 10^-19 coulombs).",
-      "difficulty": "moyen"
+      "explanation": "La charge d'un proton est égale en valeur absolue mais opposée à celle d'un électron (+1.602 × 10^-19 coulombs)."
     },
     {
       "id": "3.1.D",
@@ -56,8 +53,7 @@
         "Perd des protons"
       ],
       "correctAnswer": 1,
-      "explanation": "Un ion positif se forme quand un atome perd des électrons, créant ainsi un excès de charges positives.",
-      "difficulty": "moyen"
+      "explanation": "Un ion positif se forme quand un atome perd des électrons."
     },
     {
       "id": "3.1.E",
@@ -69,8 +65,7 @@
         "Des protons et des neutrons"
       ],
       "correctAnswer": 3,
-      "explanation": "Le noyau atomique contient des protons (chargés positivement) et des neutrons (électriquement neutres).",
-      "difficulty": "facile"
+      "explanation": "Le noyau atomique contient des protons et des neutrons."
     }
   ]
 }
