@@ -76,6 +76,7 @@ button:disabled {
     background-color: white;
     border-radius: 5px;
     transition: all 0.3s;
+    color: black;
 }
 
 .option:hover:not(:disabled) {
